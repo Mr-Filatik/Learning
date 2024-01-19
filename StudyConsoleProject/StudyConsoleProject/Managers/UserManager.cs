@@ -13,7 +13,7 @@ namespace StudyConsoleProject.Managers
     /// </summary>
     internal class UserManager : IUserManager
     {
-        private List<User> _users; //список пользователей
+        private List<User> _users; //список пользователей (редко такие данные целиком хранятся в приложении, поэтому таким образом мы изобразили запрос данных, которые где-то хранятся)
 
         public bool LoadUsers()
         {
