@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 
 namespace StudyConsoleProject.Managers
 {
+    /// <summary>
+    /// сущность для взаимодействия с вопросами
+    /// </summary>
     internal class QuestionManager : IQuestionManager
     {
-        private List<Question> _questions;
+        private List<Question> _questions; //список вопросов (редко такие данные целиком хранятся в приложении, поэтому таким образом мы изобразили запрос данных, которые где-то хранятся)
 
         public bool LoadQuestions()
         {
@@ -35,6 +38,7 @@ namespace StudyConsoleProject.Managers
             return true;
         }
 
+        // получение списка доступных вопросов
         public List<int> GetQuestions()
         {
             var output = new List<int>();
@@ -45,6 +49,7 @@ namespace StudyConsoleProject.Managers
             return output;
         }
 
+        // получение вопроса
         public Question GetQuestion(int id)
         {
             foreach (var question in _questions)
@@ -57,6 +62,7 @@ namespace StudyConsoleProject.Managers
             return null;
         }
 
+        // проверка на правильность данного ответа
         public bool CalculateAnswers(Question question, int number)
         {
             return question.Answers[number].IsRight;

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace StudyConsoleProject.Entities
 {
+    /// <summary>
+    /// Старая версия опросника
+    /// </summary>
     internal class OldVersion
     {
         internal static void Run()

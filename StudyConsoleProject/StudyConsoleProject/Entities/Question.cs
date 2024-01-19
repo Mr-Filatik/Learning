@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace StudyConsoleProject.Entities
 {
     /// <summary>
-    /// Вопрос
+    /// Сущность для вопроса
     /// </summary>
     internal class Question
     {
-        internal int Id { get; set; }
-        internal string Text { get; private set; }
-        internal List<Answer> Answers { get; private set; }
+        internal int Id { get; set; } // уникальный идентификатор для бд
+        internal string Text { get; private set; } // текст ответа
+        internal List<Answer> Answers { get; private set; } // список ответов
 
         internal Question(int id, string text, List<Answer> answers)
         {

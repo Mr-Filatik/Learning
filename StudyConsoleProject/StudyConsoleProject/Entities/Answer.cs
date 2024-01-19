@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace StudyConsoleProject.Entities
 {
     /// <summary>
-    /// Ответ
+    /// Сущность для ответов
     /// </summary>
     internal class Answer
     {
-        internal int Id { get; set; }
-        internal string Text { get; private set; }
-        internal bool IsRight { get; private set; }
+        internal int Id { get; set; } // уникальный идентификатор для бд
+        internal string Text { get; private set; } // текст ответа
+        internal bool IsRight { get; private set; } // правильный ли ответ
 
         public Answer(int id, string text, bool isRight)
         {

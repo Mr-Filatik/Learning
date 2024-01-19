@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace StudyConsoleProject.Managers
 {
+    /// <summary>
+    /// класс для управления пользователями
+    /// </summary>
     internal class UserManager : IUserManager
     {
-        private List<User> _users;
+        private List<User> _users; //список пользователей
 
         public bool LoadUsers()
         {
@@ -21,6 +24,7 @@ namespace StudyConsoleProject.Managers
             return true;
         }
 
+        // метод авторизации пользователей
         public User Login(string login, string password)
         {
             foreach (var user in _users)
