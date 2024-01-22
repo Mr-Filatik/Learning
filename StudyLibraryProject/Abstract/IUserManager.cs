@@ -1,13 +1,13 @@
-﻿using StudyConsoleProject.Entities;
+﻿using StudyLibraryProject.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyConsoleProject.Abstract
+namespace StudyLibraryProject.Abstract
 {
-    internal interface IUserManager
+    public interface IUserManager
     {
         bool LoadUsers();
         void AddUser();

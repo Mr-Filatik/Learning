@@ -1,17 +1,17 @@
-﻿using StudyConsoleProject.Abstract;
-using StudyConsoleProject.Entities;
+﻿using StudyLibraryProject.Abstract;
+using StudyLibraryProject.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyConsoleProject.Managers
+namespace StudyLibraryProject.Managers
 {
     /// <summary>
     /// класс для управления пользователями
     /// </summary>
-    internal class UserManager : IUserManager
+    public class UserManager : IUserManager
     {
         private List<User> _users; //список пользователей (редко такие данные целиком хранятся в приложении, поэтому таким образом мы изобразили запрос данных, которые где-то хранятся)
 

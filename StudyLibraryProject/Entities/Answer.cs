@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyConsoleProject.Entities
+namespace StudyLibraryProject.Entities
 {
     /// <summary>
     /// Сущность для ответов
     /// </summary>
-    internal class Answer
+    public class Answer
     {
-        internal int Id { get; set; } // уникальный идентификатор для бд
-        internal string Text { get; private set; } // текст ответа
+        public int Id { get; set; } // уникальный идентификатор для бд
+        public string Text { get; private set; } // текст ответа
 
         public Answer(int id, string text)
         {

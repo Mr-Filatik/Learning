@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyConsoleProject.Entities
+namespace StudyLibraryProject.Entities
 {
     /// <summary>
     /// Сущность для пользователя
     /// </summary>
-    internal class User
+    public class User
     {
-        internal int Id { get; private set; } // уникальный идентификатор для бд
-        internal string Name { get; private set; } // имя
-        internal UserRole Role { get; private set; } // роль в приложении
-        internal string HashPassword { get; private set; } // пароль
+        public int Id { get; private set; } // уникальный идентификатор для бд
+        public string Name { get; private set; } // имя
+        public UserRole Role { get; private set; } // роль в приложении
+        public string HashPassword { get; private set; } // пароль
 
         public User(int id, string name, UserRole role, string hashPassword)
         {
@@ -28,7 +28,7 @@ namespace StudyConsoleProject.Entities
     /// <summary>
     /// Роли пользователей в приложении
     /// </summary>
-    internal enum UserRole
+    public enum UserRole
     {
         User,
         Admin

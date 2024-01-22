@@ -3,9 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Mail;
-using StudyConsoleProject.Abstract;
-using StudyConsoleProject.Entities;
+using StudyLibraryProject.Abstract;
 using StudyConsoleProject.Managers;
+using StudyLibraryProject.Managers;
+using StudyLibraryProject;
 
 namespace StudyConsoleProject
 {
@@ -14,7 +15,7 @@ namespace StudyConsoleProject
         static void Main(string[] args)
         {
             // имимтируем работу внедрения зависимости (она выполняется за нас автоматически)
-            Questionnaire questionnaire = new Questionnaire(new UserManager(), new QuestionManager());
+            Questionnaire questionnaire = new Questionnaire(new UserManager(), new QuestionManager(), new ConsoleIOManager());
 
             // запуск работы опросника
             questionnaire.Run();

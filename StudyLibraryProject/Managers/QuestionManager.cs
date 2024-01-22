@@ -1,5 +1,5 @@
-﻿using StudyConsoleProject.Abstract;
-using StudyConsoleProject.Entities;
+﻿using StudyLibraryProject.Abstract;
+using StudyLibraryProject.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +7,12 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyConsoleProject.Managers
+namespace StudyLibraryProject.Managers
 {
     /// <summary>
     /// сущность для взаимодействия с вопросами
     /// </summary>
-    internal class QuestionManager : IQuestionManager
+    public class QuestionManager : IQuestionManager
     {
         private List<Question> _questions; //список вопросов (редко такие данные целиком хранятся в приложении, поэтому таким образом мы изобразили запрос данных, которые где-то хранятся)
 

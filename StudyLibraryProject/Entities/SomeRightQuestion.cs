@@ -4,25 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyConsoleProject.Entities
+namespace StudyLibraryProject.Entities
 {
     /// <summary>
     /// Сущность для вопроса
     /// </summary>
-    internal class SomeRightQuestion : Question
+    public class SomeRightQuestion : Question
     {
         //переменные для работы вопроса с несколькими верными ответами
         private List<int> RightAnswerId { get; init; }
-        internal List<int> CurrentAnswerId { get; set; }
+        public List<int> CurrentAnswerId { get; set; }
 
-        internal SomeRightQuestion(int id, string text, List<Answer> answers, List<int> rightAnswerId) : base(id, text, answers)
+        public SomeRightQuestion(int id, string text, List<Answer> answers, List<int> rightAnswerId) : base(id, text, answers)
         {
             RightAnswerId = rightAnswerId;
             CurrentAnswerId = new List<int>();
         }
 
         //делаем реализацию для конкретного класса
-        internal override bool IsCorrectAnswer()
+        public override bool IsCorrectAnswer()
         {
             if (RightAnswerId.Count != CurrentAnswerId.Count)
             {
@@ -46,7 +46,7 @@ namespace StudyConsoleProject.Entities
         }
 
         //делаем реализацию для конкретного класса
-        internal override void SetAnswer(int id)
+        public override void SetAnswer(int id)
         {
             if (CurrentAnswerId.Contains(id))
             {

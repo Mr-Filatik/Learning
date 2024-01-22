@@ -1,21 +1,23 @@
-﻿using StudyConsoleProject.Abstract;
-using StudyConsoleProject.Entities;
+﻿using StudyLibraryProject.Abstract;
+using StudyLibraryProject.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace StudyConsoleProject
+namespace StudyLibraryProject
 {
     /// <summary>
     /// Опросник
     /// </summary>
-    internal class Questionnaire
+    public class Questionnaire
     {
         private IUserManager _userManager; // ссылка на сущность, для управления пользователями
         private IQuestionManager _questionManager; // ссылка на сущность, для управления вопросами
+        private IIOManager _ioManager;
 
         // переменные для работы с опросником
         private User _currentUser = null; // текущий пользователь
@@ -23,14 +25,15 @@ namespace StudyConsoleProject
         private int _rightCount = 0; // количество правильных ответов
 
         // Конструктор, в котором мы принимаем сущности для работы
-        public Questionnaire(IUserManager userManager, IQuestionManager questionManager)
+        public Questionnaire(IUserManager userManager, IQuestionManager questionManager, IIOManager ioManager)
         {
             _userManager = userManager;
             _questionManager = questionManager;
+            _ioManager = ioManager;
         }
 
         // основной метод, запускающий опросник
-        internal void Run()
+        public void Run()
         {
             //место загрузки данных (у нас это пока так некрасиво, но представим что они магически появляются с удалённого сервера)
             _userManager.LoadUsers();
@@ -53,11 +56,7 @@ namespace StudyConsoleProject
         /// </summary>
         private void DrawMenu()
         {
-            Console.WriteLine("Выберите пункт меню:");
-            Console.WriteLine("1 - Пройти тест");
-            Console.WriteLine("2 - Редактировать вопросы");
-            Console.WriteLine("3 - Просмотреть историю");
-            Console.WriteLine("0 - Выйти");
+            _ioManager.ShowMainMenu();
 
             int valueForMenu = GetUserChoice(0, 3);
 
@@ -89,7 +88,7 @@ namespace StudyConsoleProject
             //получаем вопросы
             var quest = _questionManager.GetQuestions();
 
-            Console.WriteLine($"Начало тестирования. Тест содержит {quest.Count} вопросов.");
+            _ioManager.ShowMessage($"Начало тестирования. Тест содержит {quest.Count} вопросов.");
 
             //вывод всех вопросов
             for (int i = 0; i < quest.Count; i++)
@@ -97,7 +96,7 @@ namespace StudyConsoleProject
                 RunQuestion(i, quest[i]);
             }
 
-            Console.WriteLine($"Тест завершён. Процент выполнения {((float)_rightCount / quest.Count) * 100} %.");
+            _ioManager.ShowMessage($"Тест завершён. Процент выполнения {((float)_rightCount / quest.Count) * 100} %.");
         }
 
         /// <summary>
@@ -108,21 +107,21 @@ namespace StudyConsoleProject
             //получение вопроса
             var question = _questionManager.GetQuestion(id);
             //вывод вопроса
-            Console.WriteLine($"Вопрос {index + 1}: {question.Text}");
+            _ioManager.ShowMessage($"Вопрос {index + 1}: {question.Text}");
 
             if (question as SomeRightQuestion != null)
             {
-                Console.WriteLine("Выберите несколько вариантов ответа. Для применения ответов введите -1.");
+                _ioManager.ShowMessage("Выберите несколько вариантов ответа.Для применения ответов введите - 1.");
             }
             if (question as OneRightQuestion != null)
             {
-                Console.WriteLine("Выберите вариант ответа.");
+                _ioManager.ShowMessage("Выберите вариант ответа.");
             }
 
             //вывод вариантов ответов
             for (int j = 0; j < question.Answers.Count; j++)
             {
-                Console.WriteLine($"Ответ ({j + 1}): {question.Answers[j].Text}");
+                _ioManager.ShowMessage($"Ответ ({j + 1}): {question.Answers[j].Text}");
             }
 
             //Сделать выбор нескольких ответов.
@@ -149,11 +148,11 @@ namespace StudyConsoleProject
             if (_questionManager.CalculateAnswers(question))
             {
                 _rightCount++;
-                Console.WriteLine("Правильно!");
+                _ioManager.ShowMessage("Правильно");
             }
             else
             {
-                Console.WriteLine("Неправильно!");
+                _ioManager.ShowError("Неправильно");
             }
         }
 
@@ -167,8 +166,8 @@ namespace StudyConsoleProject
             bool isRange = false;
             do
             {
-                Console.Write("Ваш ответ > ");
-                isRange = int.TryParse(Console.ReadLine(), out value);
+                _ioManager.ShowMessage("Ваш ответ > ");
+                isRange = int.TryParse(_ioManager.GetData(), out value);
                 isRange = value >= min && value <= max;
             }
             while (!isRange);
@@ -195,8 +194,8 @@ namespace StudyConsoleProject
                     {
                         choiceString += $"{item} ";
                     }
-                    Console.Write($"Ваш ответ{choiceString}> ");
-                    isRange = int.TryParse(Console.ReadLine(), out value);
+                    _ioManager.ShowMessage($"Ваш ответ{ choiceString}> ");
+                    isRange = int.TryParse(_ioManager.GetData(), out value);
                     isRange = (value == -1) || (value >= min && value <= max);
                     if (value != -1)
                     {
@@ -221,30 +220,24 @@ namespace StudyConsoleProject
         /// </summary>
         private void Login()
         {
-            while (true)
+            _ioManager.ShowLogin(LoginConfirm);
+        }
+
+        private void LoginConfirm(string name, string password)
+        {
+            // авторизация пользователя с помощью менеджера пользователей
+            // если пользователь вернулся, значит всё прошло отлично
+            // если null то такого нет или ошибка
+            _currentUser = _userManager.Login(name, password);
+
+            if (_currentUser != null)
             {
-                // ввод логина
-                Console.Write("Введите имя пользователя: ");
-                string name = Console.ReadLine();
-
-                // ввод пароля
-                Console.Write("Введите пароль пользователя: ");
-                string password = Console.ReadLine();
-
-                // авторизация пользователя с помощью менеджера пользователей
-                // если пользователь вернулся, значит всё прошло отлично
-                // если null то такого нет или ошибка
-                _currentUser = _userManager.Login(name, password);
-
-                if (_currentUser != null)
-                {
-                    Console.WriteLine($"Привет {_currentUser.Name}!");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Пользователь с такими данными не найден! Попробуйте другие данные...");
-                }
+                _ioManager.ShowMessage($"Привет {_currentUser.Name}!");
+            }
+            else
+            {
+                _ioManager.ShowError("Пользователь с такими данными не найден! Попробуйте другие данные...");
+                Login();
             }
         }
 
@@ -254,7 +247,7 @@ namespace StudyConsoleProject
         private void Logout()
         {
             _currentUser = null;
-            Console.WriteLine("Производится выход из личного кабинета");
+            _ioManager.ShowMessage("Производится выход из личного кабинета");
         }
     }
 }

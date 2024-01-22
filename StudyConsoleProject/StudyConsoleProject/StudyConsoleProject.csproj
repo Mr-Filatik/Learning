@@ -8,4 +8,8 @@
 		<RootNamespace>StudyConsoleProject</RootNamespace>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\StudyLibraryProject\StudyLibraryProject.csproj" />
+	</ItemGroup>
+
 </Project>
