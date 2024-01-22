@@ -13,13 +13,11 @@ namespace StudyConsoleProject.Entities
     {
         internal int Id { get; set; } // уникальный идентификатор для бд
         internal string Text { get; private set; } // текст ответа
-        internal bool IsRight { get; private set; } // правильный ли ответ
 
-        public Answer(int id, string text, bool isRight)
+        public Answer(int id, string text)
         {
             Id = id;
             Text = text;
-            IsRight = isRight;
         }
     }
 }

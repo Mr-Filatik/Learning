@@ -9,7 +9,7 @@ namespace StudyConsoleProject.Entities
     /// <summary>
     /// Сущность для вопроса
     /// </summary>
-    internal class Question
+    internal abstract class Question //сделал класс абстрактным, у нас будут вопросы с одним ответом и несколькими, а просто вопрос является абстракцией
     {
         internal int Id { get; set; } // уникальный идентификатор для бд
         internal string Text { get; private set; } // текст ответа
@@ -21,5 +21,9 @@ namespace StudyConsoleProject.Entities
             Text = text;
             Answers = answers;
         }
+
+        //методы которые мы пока не можем сделать полноценно
+        internal abstract bool IsCorrectAnswer();
+        internal abstract void SetAnswer(int id);
     }
 }

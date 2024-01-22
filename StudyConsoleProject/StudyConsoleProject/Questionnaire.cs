@@ -39,19 +39,12 @@ namespace StudyConsoleProject
             //запуск работы опросника
             while (isWork)
             {
-                Login();
-
-                //если пользователь проходит регистрацию, то запускаем приложение
-                if (_currentUser != null)
+                if (_currentUser == null)
                 {
-                    Console.WriteLine($"Привет {_currentUser.Name}!");
+                    Login();
+                }
 
-                    DrawMenu();
-                }
-                else
-                {
-                    Console.WriteLine("Пользователь с такими данными не найден! Попробуйте другие данные...");
-                }
+                DrawMenu();
             }
         }
 
@@ -113,21 +106,47 @@ namespace StudyConsoleProject
         private void RunQuestion(int index, int id)
         {
             //получение вопроса
-            var q = _questionManager.GetQuestion(id);
+            var question = _questionManager.GetQuestion(id);
             //вывод вопроса
-            Console.WriteLine($"Вопрос {index + 1}: {q.Text}");
+            Console.WriteLine($"Вопрос {index + 1}: {question.Text}");
+
+            if (question as SomeRightQuestion != null)
+            {
+                Console.WriteLine("Выберите несколько вариантов ответа. Для применения ответов введите -1.");
+            }
+            if (question as OneRightQuestion != null)
+            {
+                Console.WriteLine("Выберите вариант ответа.");
+            }
 
             //вывод вариантов ответов
-            for (int j = 0; j < q.Answers.Count; j++)
+            for (int j = 0; j < question.Answers.Count; j++)
             {
-                Console.WriteLine($"Ответ ({j + 1}): {q.Answers[j].Text}");
+                Console.WriteLine($"Ответ ({j + 1}): {question.Answers[j].Text}");
             }
 
             //Сделать выбор нескольких ответов.
-            int value = GetUserChoice(1, q.Answers.Count);
+            if (question as SomeRightQuestion != null)
+            {
+                List<int> answerValue = GetUserChoices(1, question.Answers.Count);
+
+                foreach (int item in answerValue)
+                {
+                    _questionManager.SetAnswer(question, question.Answers[item - 1].Id);
+                }
+            }
+            if (question as OneRightQuestion != null)
+            {
+                int answerValue = GetUserChoice(1, question.Answers.Count);
+
+                if (answerValue != -1)
+                {
+                    _questionManager.SetAnswer(question, question.Answers[answerValue - 1].Id);
+                }
+            }
 
             // вывод ответа (правильный или нет)
-            if (_questionManager.CalculateAnswers(q, value - 1))
+            if (_questionManager.CalculateAnswers(question))
             {
                 _rightCount++;
                 Console.WriteLine("Правильно!");
@@ -148,7 +167,7 @@ namespace StudyConsoleProject
             bool isRange = false;
             do
             {
-                Console.Write("> ");
+                Console.Write("Ваш ответ > ");
                 isRange = int.TryParse(Console.ReadLine(), out value);
                 isRange = value >= min && value <= max;
             }
@@ -158,22 +177,75 @@ namespace StudyConsoleProject
         }
 
         /// <summary>
+        /// Метод считывающий выбор пользователя
+        /// </summary>
+        private List<int> GetUserChoices(int min, int max)
+        {
+            //требуем выбор, пока пользователь не выберет из правильного диапазона
+            List<int> choices = new List<int>();
+
+            int value = min;
+            while (value != -1)
+            {
+                bool isRange = false;
+                do
+                {
+                    string choiceString = " ";
+                    foreach (var item in choices)
+                    {
+                        choiceString += $"{item} ";
+                    }
+                    Console.Write($"Ваш ответ{choiceString}> ");
+                    isRange = int.TryParse(Console.ReadLine(), out value);
+                    isRange = (value == -1) || (value >= min && value <= max);
+                    if (value != -1)
+                    {
+                        if (!choices.Contains(value))
+                        {
+                            choices.Add(value);
+                        }
+                        else
+                        {
+                            choices.Remove(value);
+                        }
+                    }
+                }
+                while (!isRange);
+            }
+
+            return choices;
+        }
+
+        /// <summary>
         /// Метод для авторизации пользователей в приложении
         /// </summary>
         private void Login()
         {
-            // ввод логина
-            Console.Write("Введите имя пользователя: ");
-            string name = Console.ReadLine();
+            while (true)
+            {
+                // ввод логина
+                Console.Write("Введите имя пользователя: ");
+                string name = Console.ReadLine();
 
-            // ввод пароля
-            Console.Write("Введите пароль пользователя: ");
-            string password = Console.ReadLine();
+                // ввод пароля
+                Console.Write("Введите пароль пользователя: ");
+                string password = Console.ReadLine();
 
-            // авторизация пользователя с помощью менеджера пользователей
-            // если пользователь вернулся, значит всё прошло отлично
-            // если null то такого нет или ошибка
-            _currentUser = _userManager.Login(name, password);
+                // авторизация пользователя с помощью менеджера пользователей
+                // если пользователь вернулся, значит всё прошло отлично
+                // если null то такого нет или ошибка
+                _currentUser = _userManager.Login(name, password);
+
+                if (_currentUser != null)
+                {
+                    Console.WriteLine($"Привет {_currentUser.Name}!");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Пользователь с такими данными не найден! Попробуйте другие данные...");
+                }
+            }
         }
 
         /// <summary>

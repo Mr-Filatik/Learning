@@ -18,23 +18,35 @@ namespace StudyConsoleProject.Managers
 
         public bool LoadQuestions()
         {
+            //вынес ответы отдельно для удобства
+            var answers = new List<Answer>() 
+            {
+                new Answer(0, "Answer 11 (true)"),
+                new Answer(1, "Answer 12 (false)"),
+                new Answer(2, "Answer 23 (false)"),
+                new Answer(3, "Answer 24 (true)"),
+                new Answer(4, "Answer 35 (true)"),
+                new Answer(5, "Answer 36 (false)"),
+                new Answer(6, "Answer 37 (true)")
+            };
+
             _questions = new List<Question>();
-            _questions.Add(new Question(0, "Question 1", new List<Answer>()
+            _questions.Add(new OneRightQuestion(0, "Question 1", new List<Answer>()
             {
-                new Answer(0, "Answer 01 (true)", true),
-                new Answer(1, "Answer 02 (false)", false)
-            }));
-            _questions.Add(new Question(1, "Question 2", new List<Answer>()
+                answers[0],
+                answers[1]
+            }, 0));
+            _questions.Add(new OneRightQuestion(1, "Question 2", new List<Answer>()
             {
-                new Answer(2, "Answer 02 (true)", true),
-                new Answer(3, "Answer 03 (true)", true)
-            }));
-            _questions.Add(new Question(2, "Question 3", new List<Answer>()
+                answers[2],
+                answers[3]
+            }, 3));
+            _questions.Add(new SomeRightQuestion(2, "Question 3", new List<Answer>()
             {
-                new Answer(4, "Answer 04 (true)", true),
-                new Answer(5, "Answer 05 (false)", false),
-                new Answer(5, "Answer 05 (true)", true)
-            }));
+                answers[4],
+                answers[5],
+                answers[6]
+            }, new List<int> { 4, 6 } ));
             return true;
         }
 
@@ -63,11 +75,15 @@ namespace StudyConsoleProject.Managers
         }
 
         // проверка на правильность данного ответа
-        public bool CalculateAnswers(Question question, int number)
+        public bool CalculateAnswers(Question question)
         {
-            return question.Answers[number].IsRight;
+            return question.IsCorrectAnswer();
         }
 
+        public void SetAnswer(Question question, int answerId)
+        {
+            question.SetAnswer(answerId);
+        }
 
         public void AddQuestion()
         {

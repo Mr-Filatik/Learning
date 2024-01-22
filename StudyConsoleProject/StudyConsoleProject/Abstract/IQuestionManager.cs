@@ -16,6 +16,7 @@ namespace StudyConsoleProject.Abstract
         bool LoadQuestions();
         List<int> GetQuestions();
         Question GetQuestion(int id);
-        bool CalculateAnswers(Question question, int number);
+        bool CalculateAnswers(Question question);
+        void SetAnswer(Question question, int answerId);
     }
 }
