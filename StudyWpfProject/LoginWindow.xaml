@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyWpfProject"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
+        Title="LoginWindow" Height="450" Width="1200">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="1" Grid.Row="1" Margin="10">Hello</Button>
+        <Button Grid.Column="0" Grid.Row="0" Margin="10">Menu</Button>
+        <Button Grid.Column="1" Grid.Row="0" Margin="10" Grid.ColumnSpan="2">Exit</Button>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1">
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+        </StackPanel>
+        <Canvas Grid.Column="2" Grid.Row="1">
+            <Rectangle Width="200" Height="200" Fill="Coral" Canvas.Left="10"></Rectangle>
+            <Rectangle Width="100" Height="100" Fill="Violet" Canvas.Left="10">
+                <Rectangle.LayoutTransform>
+                    <RotateTransform Angle="45"></RotateTransform>
+                </Rectangle.LayoutTransform>
+            </Rectangle>
+        </Canvas>
+        <DockPanel Grid.Column="3" Grid.Row="1">
+            <Button Height="100" DockPanel.Dock="Top"></Button>
+            <Button Width="100" DockPanel.Dock="Left"></Button>
+            <Button Height="100" DockPanel.Dock="Bottom"></Button>
+            <Button Width="100" DockPanel.Dock="Right"></Button>
+            <Button></Button>
+        </DockPanel>
+        <WrapPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
+            <Button Height="50" Width="70"></Button>
+            <Button Height="50" Width="70"></Button>
+            <Button Height="50" Width="70"></Button>
+            <Button Height="50" Width="70"></Button>
+            <Button Height="50" Width="70"></Button>
+            <Button Height="50" Width="70"></Button>
+        </WrapPanel>
     </Grid>
 </Window>
