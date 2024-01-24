@@ -5,53 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyWpfProject"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="1200">
-    <Grid>
+        Title="LoginWindow" Height="450" MinHeight="400" Width="600" MinWidth="600" WindowStartupLocation="CenterScreen">
+    <Grid Background="DarkSlateGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
             <ColumnDefinition Width="150"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="1" Grid.Row="1" Margin="10">Hello</Button>
-        <Button Grid.Column="0" Grid.Row="0" Margin="10">Menu</Button>
-        <Button Grid.Column="1" Grid.Row="0" Margin="10" Grid.ColumnSpan="2">Exit</Button>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1">
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
-            <TextBlock FontSize="24">Text TextTextTextTextTextText</TextBlock>
+
+        <StackPanel Grid.Column="1" 
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2">
+            <Label FontSize="16" >ЛОГИН:</Label>
+            <TextBox x:Name="loginTextBox" TextWrapping="Wrap" FontSize="16"></TextBox>
+            <Label FontSize="16" >ПАРОЛЬ:</Label>
+            <TextBox x:Name="passwordTextBox" TextWrapping="Wrap" FontSize="16" ></TextBox>
         </StackPanel>
-        <Canvas Grid.Column="2" Grid.Row="1">
-            <Rectangle Width="200" Height="200" Fill="Coral" Canvas.Left="10"></Rectangle>
-            <Rectangle Width="100" Height="100" Fill="Violet" Canvas.Left="10">
-                <Rectangle.LayoutTransform>
-                    <RotateTransform Angle="45"></RotateTransform>
-                </Rectangle.LayoutTransform>
-            </Rectangle>
-        </Canvas>
-        <DockPanel Grid.Column="3" Grid.Row="1">
-            <Button Height="100" DockPanel.Dock="Top"></Button>
-            <Button Width="100" DockPanel.Dock="Left"></Button>
-            <Button Height="100" DockPanel.Dock="Bottom"></Button>
-            <Button Width="100" DockPanel.Dock="Right"></Button>
-            <Button></Button>
-        </DockPanel>
-        <WrapPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
-            <Button Height="50" Width="70"></Button>
-            <Button Height="50" Width="70"></Button>
-            <Button Height="50" Width="70"></Button>
-            <Button Height="50" Width="70"></Button>
-            <Button Height="50" Width="70"></Button>
-            <Button Height="50" Width="70"></Button>
-        </WrapPanel>
+        <Button Grid.Column="2" 
+                Grid.Row="2" 
+                Margin="5,5,0,5" 
+                FontSize="16" 
+                Background="#FF84F98B" 
+                Click="EnterClick">ВХОД</Button>
+        <Button Grid.Column="1" 
+                Grid.Row="2" 
+                Margin="0,5,5,5" 
+                Background="#FFF69D4A" 
+                FontSize="16" 
+                Click="TestClick">РЕГИСТРАЦИЯ</Button>
     </Grid>
 </Window>
