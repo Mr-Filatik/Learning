@@ -13,5 +13,6 @@ namespace StudyWpfProject
     /// </summary>
     public partial class App : Application
     {
+        public string? UserLogin { get; set; }
     }
 }
