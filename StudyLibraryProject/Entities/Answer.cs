@@ -12,7 +12,7 @@ namespace StudyLibraryProject.Entities
     public class Answer
     {
         public int Id { get; set; } // уникальный идентификатор для бд
-        public string Text { get; private set; } // текст ответа
+        public string Text { get; set; } // текст ответа
 
         public Answer(int id, string text)
         {

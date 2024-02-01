@@ -12,8 +12,8 @@ namespace StudyLibraryProject.Entities
     public abstract class Question //сделал класс абстрактным, у нас будут вопросы с одним ответом и несколькими, а просто вопрос является абстракцией
     {
         public int Id { get; set; } // уникальный идентификатор для бд
-        public string Text { get; private set; } // текст ответа
-        public List<Answer> Answers { get; private set; } // список ответов
+        public string Text { get; set; } // текст ответа
+        public List<Answer> Answers { get; set; } // список ответов
 
         public Question(int id, string text, List<Answer> answers)
         {

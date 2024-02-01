@@ -11,4 +11,8 @@
     <Folder Include="images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StudyLibraryProject\StudyLibraryProject.csproj" />
+  </ItemGroup>
+
 </Project>

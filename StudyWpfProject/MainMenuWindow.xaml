@@ -5,43 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyWpfProject"
         mc:Ignorable="d"
-        Title="MainMenuWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel>
-            <TextBlock x:Name="textBlock" FontSize="20">cc</TextBlock>
-            <Button Height="30" Click="ButtonClick" Style="{StaticResource myButtonStyle}">
-                Обычная кнопка
-            </Button>
-            <RepeatButton Height="30" Click="ButtonClick">Повторяющаяся кнопка</RepeatButton>
-            <ToggleButton Height="30" Checked="ButtonChecked" Unchecked="ButtonUnchecked">
-                <ToggleButton.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FFFF2E2E" Offset="1"/>
-                    </LinearGradientBrush>
-                </ToggleButton.Background>
-                Переключаемая кнопка</ToggleButton>
-            <StackPanel Height="30" Orientation="Horizontal">
-                <CheckBox x:Name="check1" IsChecked="False" Checked="CheckedCheckBox">Checkbox 1</CheckBox>
-                <CheckBox x:Name="check2" IsChecked="True">Checkbox 2</CheckBox>
-                <CheckBox x:Name="check3" IsChecked="{x:Null}">Checkbox 3</CheckBox>
-            </StackPanel>
-            <StackPanel Height="30" Orientation="Horizontal">
-                <RadioButton x:Name="rcheck1" GroupName="g1">Button 1</RadioButton>
-                <RadioButton x:Name="rcheck2" GroupName="g1">Button 2</RadioButton>
-                <RadioButton x:Name="rcheck3" GroupName="g1">Button 3</RadioButton>
-                <Button Width="100" Click="GetResultForGroup"></Button>
-            </StackPanel>
-            <GroupBox Header="Выбор дня недели">
-                <StackPanel x:Name="spawnPanel" Orientation="Vertical"></StackPanel>
-            </GroupBox>
-            <Image Source="/images/aaa.png" Width="100"></Image>
-            <DatePicker SelectedDateFormat="Long"></DatePicker>
-            <StackPanel Orientation="Horizontal" Height="30">
-                <TextBlock x:Name="textSlider" Width="30"></TextBlock>
-                <Slider x:Name="slider" ValueChanged="SliderValueChanged" Width="500" SmallChange="1"></Slider>
-            </StackPanel>
-            <ProgressBar Value="30" Height="30"></ProgressBar>
-        </StackPanel>
+        Title="Main Menu" Height="450" MinHeight="400" Width="600" MinWidth="600" WindowStartupLocation="CenterScreen">
+    
+    <Grid Background="DarkSlateGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="16" Margin="5,10,5,10" Text="ГЛАВНОЕ МЕНЮ" TextAlignment="Center"/>
+        <Button Grid.Column="1" Grid.Row="2" Margin="5,5,5,5" Background="#FF84F98B" FontSize="16" Click="OnStartTestClick" Content="ПРОЙТИ ТЕСТ"/>
+        <Button Grid.Column="1" Grid.Row="3" Margin="5,5,5,5" Background="#FFF69D4A" FontSize="16" Click="OnEditTestClick" Content="РЕДАКТИРОВАТЬ ТЕСТ"/>
+        <Button Grid.Column="1" Grid.Row="4" Margin="5,5,5,5" Background="#FFF69D4A" FontSize="16" Click="OnCheckHistoryClick" Content="ПРОСМОТР ИСТОРИИ"/>
+        <Button Grid.Column="1" Grid.Row="5" Margin="5,5,5,5" Background="#FFF69D4A" FontSize="16" Click="OnExitClick" Content="ВЫХОД"/>
     </Grid>
 </Window>

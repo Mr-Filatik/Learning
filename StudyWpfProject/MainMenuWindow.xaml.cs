@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudyLibraryProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,110 +23,37 @@ namespace StudyWpfProject
     public partial class MainMenuWindow : Window
     {
         private int number = 0;
-        public string UserLogin 
-        {
-            get 
-            {
-                return textBlock.Text; 
-            }
-            set 
-            {
-                textBlock.Text = value;
-            }
-        }
-
-        List<RadioButton> radioButtons = new List<RadioButton>();
+        public string UserLogin { get; set; }
 
         public MainMenuWindow()
         {
             InitializeComponent();
-
-            //spawnPanel
-            //< RadioButton x: Name = "rcheck3" GroupName = "g1" > Button 3 </ RadioButton >
-            //    < Button Width = "100" Click = "GetResultForGroup" ></ Button >
-            for (int i = 0; i < 7; i++)
-            {
-                RadioButton radioButton = new RadioButton();
-                radioButton.Content = $"Button {i + 1}";
-                radioButton.GroupName = "g11";
-
-                radioButtons.Add(radioButton);
-                spawnPanel.Children.Add(radioButton);
-            }
-
-            Button button = new Button();
-            button.Content = "Подать ответ";
-            button.Width = 100;
-            button.Click += GetResultFor2Group;
-
-            spawnPanel.Children.Add(button);
         }
 
-        private void ButtonClick(object sender, RoutedEventArgs e)
+        private void OnStartTestClick(object sender, RoutedEventArgs e)
         {
-            string expression = "2+3-(12*4)";
-
-            DataTable dt = new DataTable();
-            var result = dt.Compute(expression, string.Empty); //+ TryParse
-
-            textBlock.Text = result.ToString();
-            //textBlock.Text = (number++).ToString();
-            //if (check1.IsChecked == true)
-            //{
-            //    textBlock.Text = true.ToString();
-            //}
+            TestWindow window = new TestWindow();
+            window.Show();
+            this.Close();
         }
 
-        private void ButtonChecked(object sender, RoutedEventArgs e)
+        private void OnEditTestClick(object sender, RoutedEventArgs e)
         {
-            textBlock.Text += "*";
+            EditWindow window = new EditWindow();
+            window.Show();
+            this.Close();
         }
 
-        private void ButtonUnchecked(object sender, RoutedEventArgs e)
+        private void OnCheckHistoryClick(object sender, RoutedEventArgs e)
         {
-            if (textBlock.Text[^1] == '*')
-            {
-                textBlock.Text = textBlock.Text.Replace("*", "");
-            }
+            HistoryWindow window = new HistoryWindow();
+            window.Show();
+            this.Close();
         }
 
-        private void CheckedCheckBox(object sender, RoutedEventArgs e)
+        private void OnExitClick(object sender, RoutedEventArgs e)
         {
-            check3.IsChecked = null;
-        }
-
-        private void GetResultForGroup(object sender, RoutedEventArgs e)
-        {
-            int result = 0;
-            if (rcheck1.IsChecked == true)
-            {
-                result = 1;
-            }
-            if (rcheck2.IsChecked == true)
-            {
-                result = 2;
-            }
-            if (rcheck3.IsChecked == true)
-            {
-                result = 3;
-            }
-            (sender as Button).Content = result.ToString();
-        }
-
-        private void GetResultFor2Group(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < radioButtons.Count; i++)
-            {
-                if (radioButtons[i].IsChecked == true)
-                {
-                    MessageBox.Show($"Выбран ответ: {i + 1}");
-                }
-            }
-        }
-
-        private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            textSlider.Text = slider.Value.ToString();
+            (App.Current as App)?.Logout();
         }
     }
 }

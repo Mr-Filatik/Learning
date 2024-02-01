@@ -11,10 +11,10 @@ namespace StudyLibraryProject.Entities
     /// </summary>
     public class User
     {
-        public int Id { get; private set; } // уникальный идентификатор для бд
-        public string Name { get; private set; } // имя
-        public UserRole Role { get; private set; } // роль в приложении
-        public string HashPassword { get; private set; } // пароль
+        public int Id { get; set; } // уникальный идентификатор для бд
+        public string Name { get; set; } // имя
+        public UserRole Role { get; set; } // роль в приложении
+        public string HashPassword { get; set; } // пароль
 
         public User(int id, string name, UserRole role, string hashPassword)
         {
@@ -23,6 +23,8 @@ namespace StudyLibraryProject.Entities
             Role = role;
             HashPassword = hashPassword;
         }
+
+        public User() { }
     }
 
     /// <summary>

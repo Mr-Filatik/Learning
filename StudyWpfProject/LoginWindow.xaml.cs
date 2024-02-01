@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudyLibraryProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,58 +25,34 @@ namespace StudyWpfProject
             InitializeComponent();
         }
 
-
-
-        private void TestClick(object sender, RoutedEventArgs e)
+        private void OnRegisterClick(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            if (button is not null)
-            {
-                MessageBox.Show(button.Content.ToString());
-            }
+            MessageBox.Show($"REGISTER NOT WORK");
         }
 
-        private void EnterClick(object sender, RoutedEventArgs e)
+        private void OnLoginClick(object sender, RoutedEventArgs e)
         {
-            //var result = MessageBox.Show("Text?", "Hello message", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
-            //if (result == MessageBoxResult.Yes)
-            //{
-            //    MessageBox.Show("ДА");
-            //}
-            //if (result == MessageBoxResult.No)
-            //{
-            //    MessageBox.Show("НЕТ");
-            //}
-
             string? login = loginTextBox.Text;
             string? password = passwordTextBox.Text;
+
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password) && password == "1234")
             {
-                //MessageBox.Show($"ПРИВЕТ {login}");
+                (App.Current as App)?.Login(new User() { Id = 1, Name = login, HashPassword = password, Role = UserRole.Admin });
 
-                if (this.OwnedWindows.Count == 0) // проверка на отсутствие зависимых окон
-                {
-                    MainMenuWindow mainMenuWindow = new MainMenuWindow();
-                    mainMenuWindow.UserLogin = login; // наше кастомное свойство для передачи данных
-                    mainMenuWindow.Owner = this; // указание родительского окна
-                    mainMenuWindow.Show();
+                //(App.Current as App).UserLogin = "HoHoHo";
+                //}
+                //else
+                //{
+                //    var win = this.OwnedWindows[0] as MainMenuWindow;
+                //    if (win != null) win.UserLogin = login;
 
-                    (App.Current as App).UserLogin = "HoHoHo";
-                }
-                else
-                {
-                    var win = this.OwnedWindows[0] as MainMenuWindow;
-                    if(win != null) win.UserLogin = login;
-
-                    foreach (var item in App.Current.Windows)
-                    {
-                        win = item as MainMenuWindow;
-                        var app = App.Current as App;
-                        if (win != null) win.UserLogin += $", hello! {app.UserLogin}";
-                    }
-                }
-                
-                //this.Close();
+                //    foreach (var item in App.Current.Windows)
+                //    {
+                //        win = item as MainMenuWindow;
+                //        var app = App.Current as App;
+                //        if (win != null) win.UserLogin += $", hello! {app.UserLogin}";
+                //    }
+                //}
             }
         }
     }
