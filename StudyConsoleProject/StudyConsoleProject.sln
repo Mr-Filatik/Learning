@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyLibraryProject", "..\S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyWpfProject", "..\StudyWpfProject\StudyWpfProject.csproj", "{900DA2E0-61FD-49FC-9210-86A4B2990C21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyDatabaseProject", "..\StudyDatabaseProject\StudyDatabaseProject.csproj", "{A8427B89-10C4-4D10-B803-DFC7397A8896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyDatabaseProject", "..\StudyDatabaseProject\StudyDatabaseProject.csproj", "{A8427B89-10C4-4D10-B803-DFC7397A8896}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCSite", "MVCSite\MVCSite.csproj", "{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A8427B89-10C4-4D10-B803-DFC7397A8896}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8427B89-10C4-4D10-B803-DFC7397A8896}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8427B89-10C4-4D10-B803-DFC7397A8896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,23 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Shop Main";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome in shop!</h1>
+    <br/>
+    
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <p>@item.Name - @item.Price</p>
+            <a asp-controller="Shop" asp-action="Product" asp-route-id="@item.Id">Go product</a>
+            <br />
+        }
+    }
+
+    <br />
+    <p>@ViewData["Year"]</p>
+    <p>@ViewBag.Company.Name</p>
+</div>

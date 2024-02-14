@@ -1,0 +1,16 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Product";
+}
+
+<div class="text-center">
+    
+    @if (Model != null)
+    {
+        <h1 class="display-4">Product: @Model.Name @Model.Price</h1>
+        <br />
+    }
+
+    <a asp-controller="Shop" asp-action="Products">Shop</a>
+    <br />
+</div>
