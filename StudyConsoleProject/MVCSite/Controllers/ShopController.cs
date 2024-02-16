@@ -22,7 +22,7 @@ namespace MVCSite.Controllers
                 Address = "ul. Poli"
             };
 
-            return View("Product", products);
+            return View("Products", products);
         }
 
         public IActionResult Product(int id)

@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using MVCSite.Data;
+
 namespace MVCSite
 {
     public class Program
@@ -5,6 +9,15 @@ namespace MVCSite
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<CurrentContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=StudyDatabase;Trusted_Connection=True;"));
+
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+                .AddEntityFrameworkStores<CurrentContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -24,11 +37,21 @@ namespace MVCSite
 
             app.UseRouting();
 
+            app.UseAuthentication(); // !!!
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            //app.MapControllerRoute(
+            //    name: "default",
+            //    pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.Run();
         }

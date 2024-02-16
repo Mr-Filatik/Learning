@@ -1,4 +1,5 @@
 ﻿using StudyLibraryProject.Entities;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -24,34 +25,42 @@ namespace StudyConsoleProject
             Console.WriteLine("Start");
             Console.WriteLine();
 
+            CultureInfo cultureEn = new CultureInfo("en-US");
+            CultureInfo cultureRu = new CultureInfo("ru-RU");
 
+            decimal number = 10000M;
+
+            int numberPostDecimal = 3;
+
+            Console.WriteLine(number.ToString($"N{numberPostDecimal}", cultureEn)); // 10,000.000
+            Console.WriteLine(number.ToString($"N{numberPostDecimal}", cultureRu)); // 10 000,000
 
             //изменение части одной строки в файле
 
-            string path1 = @"E:\Test\MyText.txt";
+            //string path1 = @"E:\Test\MyText.txt";
 
-            string tempPath = path1 + ".tmp";
-            using (StreamReader sr = new StreamReader(path1)) // читаем
-            using (StreamWriter sw = new StreamWriter(tempPath)) // и сразу же пишем во временный файл
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine(); // считываем строку
-                    User? user = JsonSerializer.Deserialize<User>(line); // десериализуем строку в объект
-                    if (user != null && user.Id == 3) // условие для изменяемого объекта (пользователь с id = 3)
-                    {
-                        user.Password = "password"; // изменяем что-то в объекте
-                        string newValue = JsonSerializer.Serialize(user); // сериализуем объект обратно в строку
-                        sw.WriteLine(newValue); // записываем в новый фаил
-                    }
-                    else
-                    {
-                        sw.WriteLine(line); // записываем в новый фаил
-                    }
-                }
-            }
-            File.Delete(path1); // удаляем старый файл
-            File.Move(tempPath, path1); // переименовываем временный файл
+            //string tempPath = path1 + ".tmp";
+            //using (StreamReader sr = new StreamReader(path1)) // читаем
+            //using (StreamWriter sw = new StreamWriter(tempPath)) // и сразу же пишем во временный файл
+            //{
+            //    while (!sr.EndOfStream)
+            //    {
+            //        string line = sr.ReadLine(); // считываем строку
+            //        User? user = JsonSerializer.Deserialize<User>(line); // десериализуем строку в объект
+            //        if (user != null && user.Id == 3) // условие для изменяемого объекта (пользователь с id = 3)
+            //        {
+            //            user.Password = "password"; // изменяем что-то в объекте
+            //            string newValue = JsonSerializer.Serialize(user); // сериализуем объект обратно в строку
+            //            sw.WriteLine(newValue); // записываем в новый фаил
+            //        }
+            //        else
+            //        {
+            //            sw.WriteLine(line); // записываем в новый фаил
+            //        }
+            //    }
+            //}
+            //File.Delete(path1); // удаляем старый файл
+            //File.Move(tempPath, path1); // переименовываем временный файл
 
             //считывание строк с файла
             //using (StreamReader fs = new StreamReader(path1))

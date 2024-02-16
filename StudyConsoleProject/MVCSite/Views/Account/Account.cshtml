@@ -5,4 +5,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Account: @Model.Login</h1>
+
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        <input type="submit" value="Logout" />
+    </form>
 </div>

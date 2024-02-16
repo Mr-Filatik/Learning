@@ -1,0 +1,24 @@
+﻿@model ChangePasswordViewModel
+@{
+    ViewData["Title"] = "Account";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Account For Admin</h1>
+
+    <form asp-controller="Account" asp-action="ChangePassword" method="post">
+        <div>
+            <label asp-for="OldPassword"></label>
+            <input asp-for="OldPassword" />
+        </div>
+        <div>
+            <label asp-for="NewPassword"></label>
+            <input asp-for="NewPassword" />
+        </div>
+        <input type="submit" value="ChangePassword" />
+    </form>
+
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+</div>
