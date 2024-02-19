@@ -1,0 +1,20 @@
+﻿<h3>Account Data:</h3>
+<h4>@firstName @lastName @patronymic</h4>
+
+<UserRole></UserRole>
+
+<button @onclick="(() => OnLogout.InvokeAsync(firstName))">Logout</button>
+
+@code {
+    [Parameter]
+    public string firstName { get; set; }
+
+    [Parameter]
+    public string lastName { get; set; }
+
+    [Parameter]
+    public string patronymic { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnLogout { get; set; }
+}

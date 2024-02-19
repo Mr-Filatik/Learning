@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyWpfProject", "..\Study
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyDatabaseProject", "..\StudyDatabaseProject\StudyDatabaseProject.csproj", "{A8427B89-10C4-4D10-B803-DFC7397A8896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCSite", "MVCSite\MVCSite.csproj", "{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCSite", "MVCSite\MVCSite.csproj", "{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppWASM.Server", "BlazorAppWASM\Server\BlazorAppWASM.Server.csproj", "{A05C55A6-8ED5-4E6B-8E42-CA06D650A9AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppWASM.Client", "BlazorAppWASM\Client\BlazorAppWASM.Client.csproj", "{88573FF4-4AA6-4CE2-B1E0-89CFDD3C5AA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAppWASM.Shared", "BlazorAppWASM\Shared\BlazorAppWASM.Shared.csproj", "{DA611D34-9787-45E1-A76D-F29D00A14F53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B51B3B8-2E58-4837-9BFE-04BCB81BBDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05C55A6-8ED5-4E6B-8E42-CA06D650A9AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05C55A6-8ED5-4E6B-8E42-CA06D650A9AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05C55A6-8ED5-4E6B-8E42-CA06D650A9AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05C55A6-8ED5-4E6B-8E42-CA06D650A9AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88573FF4-4AA6-4CE2-B1E0-89CFDD3C5AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88573FF4-4AA6-4CE2-B1E0-89CFDD3C5AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88573FF4-4AA6-4CE2-B1E0-89CFDD3C5AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88573FF4-4AA6-4CE2-B1E0-89CFDD3C5AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA611D34-9787-45E1-A76D-F29D00A14F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA611D34-9787-45E1-A76D-F29D00A14F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA611D34-9787-45E1-A76D-F29D00A14F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA611D34-9787-45E1-A76D-F29D00A14F53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

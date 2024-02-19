@@ -1,0 +1,47 @@
+﻿@page "/account"
+
+<PageTitle>Account</PageTitle>
+
+<h1 style="background-color: @text;">Account  @test: @number</h1>
+
+<div style="width: 50px; height: 50px; background-color:coral; border-radius: 5px;" @onclick="OnClick"></div>
+
+<CascadingValue Value="@role" Name="role">
+
+    <CascadingValue Value="@role" Name="role2">
+
+        <FullName firstName="Ivanov" lastName="Ivan" patronymic="I" OnLogout="Logout" />
+
+    </CascadingValue>
+
+</CascadingValue>
+
+@code {
+    int number = 0;
+    bool flag = false;
+    string text = "red";
+
+    string role = "admin";
+
+    public void OnClick()
+    {
+        number++;
+        flag = !flag;
+        if(flag)
+        {
+            text = "red";
+        }
+        else
+        {
+            text = "black";
+        }
+    }
+
+    string test = "";
+
+    public void Logout(string str)
+    {
+        test = str;
+        //text = "yellow";
+    }
+}
