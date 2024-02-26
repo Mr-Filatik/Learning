@@ -22,6 +22,24 @@ namespace StudyConsoleProject
             // запуск старого опросника
             //OldVersion.Run();
 
+            var t1 = new Test() { Count = 1 };
+            var t2 = new Test() { Count = 1 };
+            var tn1 = new TestNew() { Count = 1 };
+            var tn2 = new TestNew() { Count = 1 };
+
+            Console.WriteLine($"t1: {t1.GetHashCode()}");
+            Console.WriteLine($"t2: {t2.GetHashCode()}");
+            Console.WriteLine($"tn1: {tn1.GetHashCode()}");
+            Console.WriteLine($"tn2: {tn2.GetHashCode()}");
+
+            Console.WriteLine($"t Equals: {t1.Equals(t2)}");
+            Console.WriteLine($"tn Equals: {tn1.Equals(tn2)}");
+
+            Console.WriteLine($"t ==: {t1 == t2}");
+            Console.WriteLine($"tn ==: {tn1 == tn2}");
+
+
+
             Console.WriteLine("Start");
             Console.WriteLine();
 
@@ -126,16 +144,30 @@ namespace StudyConsoleProject
         }
     }
 
-    public class User
+    //public class User
+    //{
+    //    [JsonPropertyName("id")]
+    //    public int Id { get; set; }
+    //    [JsonPropertyName("name")]
+    //    public string Name { get; set; }
+    //    [JsonPropertyName("email")]
+    //    public string Email { get; set; }
+    //    [JsonIgnore]
+    //    [JsonPropertyName("password")]
+    //    public string Password { get; set; }
+    //}
+
+    public class Test
     {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-        [JsonPropertyName("email")]
-        public string Email { get; set; }
-        //[JsonIgnore]
-        [JsonPropertyName("password")]
-        public string Password { get; set; }
+        public int Count { get; set; }
+    }
+
+    public class TestNew
+    {
+        public int Count { get; set; }
+        public override int GetHashCode()
+        {
+            return 1;
+        }
     }
 }
