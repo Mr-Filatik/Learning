@@ -10,8 +10,12 @@ namespace BlazorAppWASM
 
             // Add services to the container.
 
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages();
+            builder.Services.AddControllers();
+            //builder.Services.AddControllersWithViews();
+            //builder.Services.AddRazorPages();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
@@ -19,6 +23,8 @@ namespace BlazorAppWASM
             if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
             else
             {
@@ -35,7 +41,7 @@ namespace BlazorAppWASM
             app.UseRouting();
 
 
-            app.MapRazorPages();
+            //app.MapRazorPages();
             app.MapControllers();
             app.MapFallbackToFile("index.html");
 

@@ -1,0 +1,126 @@
+﻿@page "/products"
+@using BlazorAppWASM.Shared
+
+@inject HttpClient Http
+
+<PageTitle>Products</PageTitle>
+
+@if (products == null)
+{
+    <p><em>Load product...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Decs</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products.Products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <button class="btn btn-primary" @onclick="Previous">Назад</button>
+
+    <span style="margin: 10px;">Страница @products.CurrentPage из @products.NumberPage</span>
+
+    <button class="btn btn-primary" @onclick="Next">Вперёд</button>
+}
+
+<br />
+
+<button class="btn btn-primary" @onclick="Create">Создать продукт</button>
+
+<button class="btn btn-primary" @onclick="Delete">Удалить продукт</button>
+
+<p>@message</p>
+<EditForm EditContext="@editContext" OnValidSubmit="Create">
+    <DataAnnotationsValidator></DataAnnotationsValidator> <!--!!!-->
+    <ValidationSummary></ValidationSummary>
+    <div>
+        <h4>Name</h4>
+        <InputText @bind-Value="newProduct.Name"></InputText>
+    </div>
+    <div>
+        <h4>Description</h4>
+        <InputText @bind-Value="newProduct.Description"></InputText>
+    </div>
+    <div>
+        <h4>Price</h4>
+        <InputNumber @bind-Value="newProduct.Price"></InputNumber>
+    </div>
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private ProductPart? products;
+    private Product newProduct = new Product();
+    private EditContext editContext;
+    private string message = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        editContext = new EditContext(newProduct);
+        await DataLoad(1);
+        // await Http.SendAsync(new HttpRequestMessage()
+        // {
+
+        // });
+    }
+
+    private async Task Create()
+    {
+        message = "Create";
+        // if (editContext != null && editContext.Validate())
+        // {
+        //     message = "Create";
+        // }
+        // else
+        // {
+        //     message = "No Create";
+        // }
+        await Http.PostAsJsonAsync<Product>("api/product", newProduct);
+        await DataLoad(products.CurrentPage);
+    }
+
+    private async Task Delete()
+    {
+        await Http.DeleteFromJsonAsync<Product>("api/product/9");
+        await DataLoad(products.CurrentPage);
+    }
+
+    private async Task Previous()
+    {
+        if (products.CurrentPage > 1)
+        {
+            await DataLoad(products.CurrentPage - 1);
+        }
+    }
+
+    private async Task Next()
+    {
+        if (products.CurrentPage < products.NumberPage)
+        {
+            await DataLoad(products.CurrentPage + 1);
+        }
+    }
+
+    private async Task DataLoad(int page)
+    {
+        products = await Http.GetFromJsonAsync<ProductPart>($"api/product/{page}");
+    }
+}
