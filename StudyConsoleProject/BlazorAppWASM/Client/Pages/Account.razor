@@ -1,5 +1,14 @@
 ﻿@page "/account"
 
+@attribute [Authorize]
+
+@using Blazored.LocalStorage
+
+@inject ILocalStorageService localStorage
+@inject AuthenticationStateProvider stateProvider
+
+@inject NavigationManager NavMen
+
 <PageTitle>Account</PageTitle>
 
 <h1 style="background-color: @text;">Account  @test: @number</h1>
@@ -39,9 +48,13 @@
 
     string test = "";
 
-    public void Logout(string str)
+    public async Task Logout(string str)
     {
-        test = str;
+        //test = str;
         //text = "yellow";
+        await localStorage.ClearAsync();
+        await stateProvider.GetAuthenticationStateAsync();
+
+        NavMen.NavigateTo("/");
     }
 }

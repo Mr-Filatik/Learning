@@ -1,0 +1,37 @@
+﻿@page "/login"
+@using Blazored.LocalStorage
+
+@inject ILocalStorageService localStorage
+@inject AuthenticationStateProvider stateProvider
+
+@inject NavigationManager NavMen
+@inject HttpClient client
+
+<h3>Login</h3>
+
+<EditForm Model="user" OnSubmit="LoginAction">
+    <label>Login</label>
+    <InputText @bind-Value="user.Login"></InputText>
+    <br/>
+    <label>Password</label>
+    <InputText @bind-Value="user.Password"></InputText>
+    <br />
+    <button type="submit">Login</button>
+</EditForm>
+
+@code {
+    User user = new User();
+
+    async Task LoginAction()
+    {
+        var result = await client.PostAsJsonAsync("api/user/gettoken", user);
+        var token = result.Content.ReadAsStringAsync();
+
+        //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNoYWhyaXlhciIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0.l9E7Oypb-ozndpFUkeVhOYzhtjGEuFmdYdAxhbpXAFY";
+
+        await localStorage.SetItemAsync("token", token);
+        await stateProvider.GetAuthenticationStateAsync();
+
+        NavMen.NavigateTo("/account");
+    }
+}

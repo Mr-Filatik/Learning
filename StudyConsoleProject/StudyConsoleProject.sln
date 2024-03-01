@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppWASM.Client", "Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppWASM.Shared", "BlazorAppWASM\Shared\BlazorAppWASM.Shared.csproj", "{DA611D34-9787-45E1-A76D-F29D00A14F53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainAPI", "MainAPI\MainAPI.csproj", "{254CDA39-ACB1-4559-8FD1-F5FF6F786D85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainAPI", "MainAPI\MainAPI.csproj", "{254CDA39-ACB1-4559-8FD1-F5FF6F786D85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
