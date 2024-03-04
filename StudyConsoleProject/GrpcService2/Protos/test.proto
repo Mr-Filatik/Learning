@@ -1,0 +1,11 @@
+﻿syntax = "proto3";
+
+package test;
+
+import "Protos/messages.proto";
+
+option csharp_namespace = "GrpcService2.ProtoBuf";
+
+service TestGrpcService {
+    rpc Test (messages.TestGrpcMessage) returns (messages.TestGrpcMessage);
+}

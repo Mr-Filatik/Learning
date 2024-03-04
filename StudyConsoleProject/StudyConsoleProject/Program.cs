@@ -1,4 +1,8 @@
-﻿using StudyLibraryProject.Entities;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Net.Client;
+using GrpcService2.ProtoBuf;
+using GrpcService2.ProtoBuf.Messages;
+using StudyLibraryProject.Entities;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -13,6 +17,25 @@ namespace StudyConsoleProject
     {
         static void Main(string[] args)
         {
+            using var channel = GrpcChannel.ForAddress("http://localhost:5205");
+            var client = new TestGrpcService.TestGrpcServiceClient(channel);
+            var response = client.Test(new TestGrpcMessage()
+            {
+                Id = 0,
+                Data = "Hello!",
+                Date = DateTime.UtcNow.ToTimestamp(),
+                Price = (DecimalGrpc)10M,
+                PType = ProductTypeGrpc.One,
+                Temp = { new float[] { 1F, 2F, 0.5F } }
+            });
+            Console.WriteLine($"{response.Id} {response.Data} {response.Date.ToString()} {(decimal)response.Price}");
+            foreach (var item in response.Temp)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+            
+
             // имимтируем работу внедрения зависимости (она выполняется за нас автоматически)
             //Questionnaire questionnaire = new Questionnaire(new UserManager(), new QuestionManager(), new ConsoleIOManager());
 
@@ -22,36 +45,36 @@ namespace StudyConsoleProject
             // запуск старого опросника
             //OldVersion.Run();
 
-            var t1 = new Test() { Count = 1 };
-            var t2 = new Test() { Count = 1 };
-            var tn1 = new TestNew() { Count = 1 };
-            var tn2 = new TestNew() { Count = 1 };
+            //var t1 = new Test() { Count = 1 };
+            //var t2 = new Test() { Count = 1 };
+            //var tn1 = new TestNew() { Count = 1 };
+            //var tn2 = new TestNew() { Count = 1 };
 
-            Console.WriteLine($"t1: {t1.GetHashCode()}");
-            Console.WriteLine($"t2: {t2.GetHashCode()}");
-            Console.WriteLine($"tn1: {tn1.GetHashCode()}");
-            Console.WriteLine($"tn2: {tn2.GetHashCode()}");
+            //Console.WriteLine($"t1: {t1.GetHashCode()}");
+            //Console.WriteLine($"t2: {t2.GetHashCode()}");
+            //Console.WriteLine($"tn1: {tn1.GetHashCode()}");
+            //Console.WriteLine($"tn2: {tn2.GetHashCode()}");
 
-            Console.WriteLine($"t Equals: {t1.Equals(t2)}");
-            Console.WriteLine($"tn Equals: {tn1.Equals(tn2)}");
+            //Console.WriteLine($"t Equals: {t1.Equals(t2)}");
+            //Console.WriteLine($"tn Equals: {tn1.Equals(tn2)}");
 
-            Console.WriteLine($"t ==: {t1 == t2}");
-            Console.WriteLine($"tn ==: {tn1 == tn2}");
+            //Console.WriteLine($"t ==: {t1 == t2}");
+            //Console.WriteLine($"tn ==: {tn1 == tn2}");
 
 
 
-            Console.WriteLine("Start");
-            Console.WriteLine();
+            //Console.WriteLine("Start");
+            //Console.WriteLine();
 
-            CultureInfo cultureEn = new CultureInfo("en-US");
-            CultureInfo cultureRu = new CultureInfo("ru-RU");
+            //CultureInfo cultureEn = new CultureInfo("en-US");
+            //CultureInfo cultureRu = new CultureInfo("ru-RU");
 
-            decimal number = 10000M;
+            //decimal number = 10000M;
 
-            int numberPostDecimal = 3;
+            //int numberPostDecimal = 3;
 
-            Console.WriteLine(number.ToString($"N{numberPostDecimal}", cultureEn)); // 10,000.000
-            Console.WriteLine(number.ToString($"N{numberPostDecimal}", cultureRu)); // 10 000,000
+            //Console.WriteLine(number.ToString($"N{numberPostDecimal}", cultureEn)); // 10,000.000
+            //Console.WriteLine(number.ToString($"N{numberPostDecimal}", cultureRu)); // 10 000,000
 
             //изменение части одной строки в файле
 
@@ -139,8 +162,8 @@ namespace StudyConsoleProject
             //Console.WriteLine();
             //Console.WriteLine($"{user.Id} {user.Name} {user.Email} {user.Password}");
 
-            Console.WriteLine();
-            Console.WriteLine("End");
+            //Console.WriteLine();
+            //Console.WriteLine("End");
         }
     }
 
@@ -157,17 +180,17 @@ namespace StudyConsoleProject
     //    public string Password { get; set; }
     //}
 
-    public class Test
-    {
-        public int Count { get; set; }
-    }
+    //public class Test
+    //{
+    //    public int Count { get; set; }
+    //}
 
-    public class TestNew
-    {
-        public int Count { get; set; }
-        public override int GetHashCode()
-        {
-            return 1;
-        }
-    }
+    //public class TestNew
+    //{
+    //    public int Count { get; set; }
+    //    public override int GetHashCode()
+    //    {
+    //        return 1;
+    //    }
+    //}
 }

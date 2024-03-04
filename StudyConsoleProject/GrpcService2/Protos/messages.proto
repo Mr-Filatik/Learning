@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+package messages;
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcService2.ProtoBuf.Messages";
+
+message TestGrpcMessage {
+    int32 id = 1;
+    string data = 2;
+    google.protobuf.Timestamp date = 3;
+    DecimalGrpc price = 4;
+    ProductTypeGrpc p_type = 5;
+    repeated float temp = 6;
+}
+
+message DecimalGrpc {
+    int64 units = 1;
+    int32 nanos = 2;
+}
+
+enum ProductTypeGrpc {
+    ProductTypeGrpc_ONE = 0;
+    ProductTypeGrpc_TWO = 1;
+    ProductTypeGrpc_THREE = 2;
+}
+
+enum ClientTypeGrpc {
+    ClientTypeGrpc_NONE = 0;
+    ClientTypeGrpc_QWERTY = 1;
+    ClientTypeGrpc_ONE = 2;
+}

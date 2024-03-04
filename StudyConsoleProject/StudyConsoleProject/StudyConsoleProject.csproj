@@ -9,6 +9,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Google.Protobuf" Version="3.25.3" />
+	  <PackageReference Include="Grpc.Net.Client" Version="2.61.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.15">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,6 +21,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\StudyLibraryProject\StudyLibraryProject.csproj" />
+	  <ProjectReference Include="..\GrpcService2\GrpcService2.csproj" />
 	</ItemGroup>
 
 </Project>
